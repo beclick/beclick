@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="{{ asset('style.css') . '?' . rand(0, 99999) }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ asset('js/common.js') }}"></script>
+</head>
+<body class="lp">
+<div class="login-page">
+    <div class="content">
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            <div class="logo">
+                <img src="{{ asset('img/logo.svg') }}">
+            </div>
+            <div class="top-text">
+                {{ __('auth.create_account') }}
+            </div>
+            <div class="field-name">
+                {{ __('auth.user_name') }}
+            </div>
+            <input type="text" placeholder="{{ __('auth.enter_nicname') }}" name="name" value="{{ old('name') }}" required autocomplete="name"
+                   autofocus>
+            @error('name')
+            <strong>{{ $message }}</strong>
+            @enderror
+            <div class="field-name">
+                {{ __('app.email') }}
+            </div>
+            <input class="ltr" type="text" placeholder="{{ __('auth.enter_email') }}" name="email"
+                   value="{{ old('email') }}" required autocomplete="email" autofocus>
+            @error('email')
+            <strong>{{ $message }}</strong>
+            @enderror
+            <div class="field-name">
+                {{ __('auth.password') }}
+            </div>
+            <div class="pass">
+                <a class="show-pass"></a>
+                <input class="ltr" type="password" placeholder="{{ __('auth.enter_password') }}" name="password" required
+                       autocomplete="current-password">
+                @error('password')
+                <strong>{{ $message }}</strong>
+                @enderror
+            </div>
+            <div class="pass">
+                <a class="show-pass"></a>
+                <input class="ltr" type="password" placeholder="{{ __('auth.confirm_password') }}" name="password_confirmation" required autocomplete="new-password">
+            </div>
+            <div class="agree">
+                <input type="checkbox" class="checkbox" id="agree"><label for="agree">{{ __('auth.i_agree_with') }} <a href="#">{{ __('auth.service_rules_and_privacy_policy') }}</a></label>
+            </div>
+            <button type="submit">{{ __('auth.register_now') }}</button>
+            <div class="or">
+                {{ __('auth.or') }}
+            </div>
+
+{{--            Google OAUTH--}}
+            <a href="{{ route('auth.social', 'google') }}" class="google-login">
+                <img src="img/google.png"> {{ __('auth.login_with_google') }}
+            </a>
+{{--            <a href="{{ url('/login/facebook') }}" class="google-login">--}}
+{{--                <img src="img/linkedin.png"> {{ __('auth.login_with_google') }}--}}
+{{--            </a>--}}
+{{--            <a href="{{ url('/login/linkedin') }}" class="google-login">--}}
+{{--                <img src="img/linkedin.png"> {{ __('auth.login_with_google') }}--}}
+{{--            </a>--}}
+{{--            <a href="{{ url('/login/twitter') }}" class="google-login">--}}
+{{--                <img src="img/linkedin.png"> {{ __('auth.login_with_google') }}--}}
+{{--            </a>--}}
+
+
+
+        </form>
+    </div>
+    <div class="bottom-block">
+        {{ __('auth.already_registered') }} <a href="{{ route('login') }}">{{ __('auth.login') }}</a>
+    </div>
+    <div class="copy">
+        <p>{{ __('app.all_rights_reserved') }}</p>
+        <a href="#">{{ __('app.privacy_policy') }}</a>
+    </div>
+</div>
+</body>
+</html>
